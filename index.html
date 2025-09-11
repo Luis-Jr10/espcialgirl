@@ -131,11 +131,20 @@
 <script>
 const openBtn = document.getElementById('openModal');
 
+// Función para formatear la fecha actual en español
+function fechaActual() {
+  const opciones = { day: 'numeric', month: 'long', year: 'numeric' };
+  const hoy = new Date();
+  return hoy.toLocaleDateString('es-ES', opciones);
+}
+
 openBtn.addEventListener('click', () => {
+  const fechaTexto = `Hogwarts, ${fechaActual()}`;
+
   Swal.fire({
     html: `
       <div class="sweet-content">
-        <p class="fecha">Hogwarts, 9 de septiembre de 2025</p>
+        <p class="fecha">${fechaTexto}</p>
         <p>Querida <b>Yams (mi niña 🫶)</b>,</p>
         <p>Quisiera extender una invitación muy especial. Nos encantaría compartir contigo 
         una mágica velada de cine. La fecha y el lugar serán a tu elección, pues entendemos 
@@ -163,7 +172,7 @@ openBtn.addEventListener('click', () => {
       doc.rect(0,0,210,297,'F');
       doc.setFont("times","italic");
       doc.setFontSize(14);
-      doc.text("Hogwarts, 9 de septiembre de 2025", 150, 20, {align:"right"});
+      doc.text(fechaTexto, 150, 20, {align:"right"});  // <-- Aquí también se usa dinámica
       doc.setFont("times","normal");
       doc.setFontSize(16);
       doc.text("Día: ________________________________", 20, 50);
